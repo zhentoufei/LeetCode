@@ -1,5 +1,6 @@
 package easy;
 
+import java.awt.print.Printable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -9,8 +10,14 @@ public class twoSum {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner scan=new Scanner(System.in);
+		String target=scan.nextLine();
 		String str=scan.nextLine();
+		scan.close();
 		int[] nums=transInt(str);
+		int[] res=twoSum1(nums, Integer.parseInt(target));
+		for (int i : res) {
+			System.out.print(i);
+		}
 	}
 	
 	public static int[] transInt(String numberString){
