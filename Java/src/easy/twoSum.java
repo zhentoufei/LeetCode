@@ -1,6 +1,5 @@
 package easy;
 
-import java.awt.print.Printable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -14,7 +13,11 @@ public class twoSum {
 		String str=scan.nextLine();
 		scan.close();
 		int[] nums=transInt(str);
-		int[] res=twoSum1(nums, Integer.parseInt(target));
+		for (int k : nums) {
+			System.out.print(k);
+		}
+		//int[] res=twoSumFunction(nums, Integer.parseInt(target));
+		int[] res=twoSumFunction(new int[]{1,2,3,4},7);
 		for (int i : res) {
 			System.out.print(i);
 		}
@@ -24,11 +27,11 @@ public class twoSum {
 		char[] digitNumberArray = numberString.toCharArray();
 		int[] digitArry = new int[numberString.toCharArray().length];
 		for (int i = 0; i < digitNumberArray.length; i++) {
-		    digitArry[i] = digitNumberArray[i]-'0';
+		    digitArry[i] = Integer.parseInt(digitNumberArray[i]);
 		}
 		return digitArry;
 	}
-	public static int[] twoSum1(int[] nums, int target) {
+	public static int[] twoSumFunction(int[] nums, int target) {
 		Map<Integer, Integer> map=new HashMap<>();
 		for(int i =0;i<nums.length;i++){
 			if(map.containsKey(target-nums[i])){
