@@ -1,3 +1,4 @@
+#第一种方法
 def lengthOfLongestSubstring(self, s):
     start = 0
     maxlen = 0
@@ -10,7 +11,7 @@ def lengthOfLongestSubstring(self, s):
         if i - start + 1 > maxlen: maxlen = i - start + 1
         hashtable[ord(s[i])] = i
     return maxlen
-
+#第二种方法
 def lengthOfLongestSubstring1(self, s):
     start = 0
     maxlen = 0
