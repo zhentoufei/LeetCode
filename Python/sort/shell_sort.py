@@ -1,4 +1,5 @@
 # coding: utf-8
+
 def shell_sort(nums):
     step = len(nums)/2
     while step>0:
@@ -10,6 +11,10 @@ def shell_sort(nums):
                     break
         step = step/2
     return nums
+
+
+
+
 def shellSort(nums):
     # 设定步长
     step = len(nums) / 2
@@ -21,8 +26,3 @@ def shellSort(nums):
                 i -= step
         step = step / 2
     return nums
-
-
-if __name__ == '__main__':
-    nums = [9, 3, 5, 8, 2, 7, 1]
-    print shellSort(nums)
