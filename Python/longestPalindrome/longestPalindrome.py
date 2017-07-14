@@ -12,21 +12,22 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        if not s: return ""
+        if not s:
+            return ""
 
-        ret = "";
-        i = 0
+        ret = ""
         for i in range(len(s) * 2 - 1):
             left = i / 2
             right = i / 2
-            if (i & 1) == 1: right += 1
+            if i & 1 == 1:
+                right += 1
 
             tmp = self.longestStr(s, left, right)
 
-            if len(tmp) > len(ret): ret = tmp
+            if len(tmp) > len(ret):
+                ret = tmp
 
         return ret
-
 
     def longestPalindrome_1(self, s):
         """
@@ -41,13 +42,14 @@ class Solution(object):
             for c in s:
                 T += ['#', c]
             T += ['#', '$']
+            print T
             return T
 
         T = preProcess(s)
         P = [0] * len(T)
         center, right = 0, 0
         for i in xrange(1, len(T) - 1):
-            i_mirror = 2 * center - i
+            i_mirror = 2 * center - i  # 对称点 可以这么看：i+i_mirror=2 * center
             if right > i:
                 P[i] = min(right - i, P[i_mirror])
             else:
@@ -68,5 +70,5 @@ class Solution(object):
 
 
 if __name__ == "__main__":
-    print Solution().longestPalindrome("ab123sdasdasasdffdsab")
-    print Solution().longestPalindrome_1("ab123sdasdasasdffdsab")
+    # print Solution().longestPalindrome("a1")
+    print Solution().longestPalindrome_1("ab123s")
