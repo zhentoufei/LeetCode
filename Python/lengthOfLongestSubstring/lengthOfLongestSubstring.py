@@ -1,4 +1,6 @@
-#第一种方法
+# -*- coding:utf-8 -*-
+
+# 第一种方法
 def lengthOfLongestSubstring(self, s):
     start = 0
     maxlen = 0
@@ -8,11 +10,14 @@ def lengthOfLongestSubstring(self, s):
             while start <= hashtable[ord(s[i])]:
                 hashtable[ord(s[start])] = -1
                 start += 1
-        if i - start + 1 > maxlen: maxlen = i - start + 1
+        if i - start + 1 > maxlen:
+            maxlen = i - start + 1
         hashtable[ord(s[i])] = i
     return maxlen
-#第二种方法
-def lengthOfLongestSubstring1(self, s):
+
+
+# 第二种方法
+def lengthOfLongestSubstring1(s):
     start = 0
     maxlen = 0
     dict = {}
@@ -23,6 +28,11 @@ def lengthOfLongestSubstring1(self, s):
             while start <= dict[s[i]]:
                 dict[s[start]] = -1
                 start += 1
-        if i - start + 1 > maxlen: maxlen = i - start + 1
+        if i - start + 1 > maxlen:
+            maxlen = i - start + 1
         dict[s[i]] = i
     return maxlen
+
+if __name__=='__main__':
+    s = '123112'
+    print lengthOfLongestSubstring1(s)
