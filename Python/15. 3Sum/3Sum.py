@@ -43,7 +43,8 @@ class Solution(object):
                             k -= 1
             i += 1
         return result
-
+    
+    # the solution of least time consumption
     def threeSum2(self, nums):
         """
         :type nums: List[int]
