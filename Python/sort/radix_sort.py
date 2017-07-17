@@ -49,3 +49,8 @@ def radix_sort(L):
         # 将已分配好的桶中数据再倒出来，此时已是对应当前位数有序的表
         for x in range(0, len(L)):
             L[x] = bucket[x]
+    return L
+
+if __name__=='__main__':
+    list = [101, 81, 72, 1]
+    print radix_sort(list)
