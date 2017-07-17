@@ -49,21 +49,29 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        d = collections.Counter(nums)
-        nums_2 = [x[0] for x in d.items() if x[1] > 1]
-        nums_new = sorted([x[0] for x in d.items()])
-        rtn = [[0, 0, 0]] if d[0] >= 3 else []
-        for i, j in enumerate(nums_new):
-            if j <= 0:
-                numss2 = nums_new[i + 1:]
-                for x, y in enumerate(numss2):
-                    if 0 - j - y in [j, y] and 0 - j - y in nums_2:
-                        if sorted([j, y, 0 - j - y]) not in rtn:
-                            rtn.append(sorted([j, y, 0 - j - y]))
-                    if 0 - j - y not in [j, y] and 0 - j - y in nums_new:
-                        if sorted([j, y, 0 - j - y]) not in rtn:
-                            rtn.append(sorted([j, y, 0 - j - y]))
-        return rtn
+        res = []
+        dic = {}
+        for x in nums:  # o(n)
+            if x not in dic:
+                dic[x] = 1
+            else:
+                dic[x] += 1
+        uniq = dic.keys()
+        pos = sorted(x for x in uniq if x >= 0)  # (o(nlogn))
+        neg = sorted(x for x in uniq if x < 0)
+        if 0 in dic and dic[0] >= 3:
+            res.append([0, 0, 0])
+        for p in pos:
+            for n in neg:
+                r = 0 - p - n
+                if r in dic:
+                    if (r == p or r == n) and dic[r] > 1:
+                        res.append([n, r, p])
+                    elif r < n:  # avoid same
+                        res.append([r, n, p])
+                    elif r > p:
+                        res.append([n, p, r])
+        return res
 
 if __name__ == '__main__':
     result = Solution().threeSum([-1, 0, 1, 2, -1, -4])
