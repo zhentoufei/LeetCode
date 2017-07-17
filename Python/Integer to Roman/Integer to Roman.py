@@ -28,4 +28,3 @@ class Solution:
 
 if __name__ == "__main__":
     print Solution().intToRoman(999)
-    print Solution().intToRoman(3999)
