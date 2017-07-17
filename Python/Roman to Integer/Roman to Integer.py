@@ -6,7 +6,10 @@
 #
 # Input is guaranteed to be within the xrange from 1 to 3999.
 #
-
+# 不管怎么说，话是要祭出规则
+# 其次，罗马数字转阿拉伯数字规则（仅限于3999以内）：
+#
+# 从前向后遍历罗马数字，如果某个数比前一个数小，则加上该数。反之，减去前一个数的两倍然后加上该数
 class Solution:
     # @return an integer
     def romanToInt(self, s):
@@ -20,5 +23,5 @@ class Solution:
         return decimal
 
 if __name__ == "__main__":
+    # print Solution().romanToInt("CMXCIX")
     print Solution().romanToInt("IIVX")
-    print Solution().romanToInt("MMMCMXCIX")
