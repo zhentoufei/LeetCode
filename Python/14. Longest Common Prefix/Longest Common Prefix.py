@@ -12,12 +12,14 @@ class Solution:
         """
         if not strs:
             return ""
-
+        for string in strs:
+            if not string:
+                return ""
         for i in range(len(strs[0])):
             for string in strs[1:]:
-                if i>len(string) or string[i] != strs[0][i]:
+                if i>=len(string) or string[i] != strs[0][i]:
                     return strs[0][:i]
         return strs[0]
 
 if __name__ == "__main__":
-    print Solution().longestCommonPrefix(["hello", "heaven", "heavy"])
+    print Solution().longestCommonPrefix(["aa","a"])
