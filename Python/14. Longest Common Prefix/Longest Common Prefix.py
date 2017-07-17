@@ -22,4 +22,4 @@ class Solution:
         return strs[0]
 
 if __name__ == "__main__":
-    print Solution().longestCommonPrefix(["aa","a"])
+    print Solution().longestCommonPrefix(["aaa","ab"])
