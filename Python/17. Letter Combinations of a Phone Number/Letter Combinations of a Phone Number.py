@@ -21,7 +21,7 @@ class Solution:
         if not digits:
             return []
 
-        lookup, result = ["", "", "ac", "def", "ghi", "jkl", "mno", \
+        lookup, result = ["", "", "abc", "def", "ghi", "jkl", "mno", \
                           "pqrs", "tuv", "wxyz"], [""]
 
         for digit in reversed(digits):
@@ -56,4 +56,4 @@ class Solution2:
 
 
 if __name__ == "__main__":
-    print Solution().letterCombinations("23")
+    print Solution().letterCombinations("")
