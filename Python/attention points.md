@@ -25,3 +25,9 @@ for i in range(len(strs[0])):
             return strs[0][:i]
 return strs[0]
 ```
+4. 先看一段代码，关于数组的切片操作
+```
+>>a=['a']
+>>print a[1:]
+>>[] #可以看出这种切片操作如果索引不到不会报错，返回空
+```
