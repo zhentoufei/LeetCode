@@ -44,3 +44,18 @@ for i in xrange(n):
 while fast.next:
     slow, fast = slow.next, fast.next # 此时slow对应的就是要删除的节点
 ```
+
+6. 一种两两合并的方式
+```
+if not lists:
+    return None
+left, right = 0, len(lists) - 1
+while right > 0:
+    if left >= right:
+        left = 0
+    else:
+        lists[left] = mergeTwoLists(lists[left], lists[right])
+        left += 1
+        right -= 1
+return lists[0]
+```
