@@ -31,3 +31,16 @@ return strs[0]
 >>print a[1:]
 >>[] #可以看出这种切片操作如果索引不到不会报错，返回空
 ```
+
+5. 链表，找到倒数第n个节点
+```
+dummy = ListNode(-1)
+dummy.next = head
+slow, fast = dummy, dummy
+
+for i in xrange(n):
+    fast = fast.next
+
+while fast.next:
+    slow, fast = slow.next, fast.next # 此时slow对应的就是要删除的节点
+```
