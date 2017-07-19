@@ -27,5 +27,24 @@ class Solution:
             self.generateParenthesisRecu(result, current + ")", left, right - 1)
 
 
+# 36ms的解决方案
+class Solution2(object):
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        dp = []
+        index = 1
+        dp.append([""])
+        while index < n+1:
+            temp = []
+            for i in range(index):
+                for front in dp[i]:
+                    for back in dp[len(dp) - i - 1]:
+                        temp.append("(" + front + ")" + back)
+            dp.append(temp)
+            index += 1
+        return dp[n]
 if __name__ == "__main__":
     print Solution().generateParenthesis(2)
