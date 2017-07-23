@@ -1,4 +1,4 @@
-Python学习日常
+### Python学习日常
 
 ```python
 # coding:utf-8
@@ -40,7 +40,7 @@ d = {x: randint(60, 100) for x in xrange(1, 21)}
 dd = {k: v for k, v in d.iteritems() if v > 90}
 ```
 
-2. 为元组中的每个元素命名，提高程序的可读性
+### 2. 为元组中的每个元素命名，提高程序的可读性
 
    元组的好处是使用娇小的存储空间，而且访问速度比较快
 
@@ -60,7 +60,7 @@ print s1
 print s1.name
 ```
 
-3. 统计序列中元素出现的频度
+### 3. 统计序列中元素出现的频度
 
 ```python
 # coding:utf-8
@@ -79,7 +79,7 @@ c2 = Counter(data).most_common(3)
 print c2
 ```
 
-4. 词频统计
+### 4. 词频统计
 
 ```python
 # coding:utf-8
@@ -91,7 +91,7 @@ txt = open('test.txt', 'r')
 c = Counter(re.split('\W+', txt))# 非字母的文件分割
 ```
 
-5. 根据字典中的值得大小，对字典中的项排序
+### 5. 根据字典中的值得大小，对字典中的项排序
 
 ```python
 # coding:utf-8
@@ -124,7 +124,7 @@ import operator
 res4 = sorted(d.items(), key=operator.itemgetter(1))
 ```
 
-6. 快速找到字典中的公共键
+### 6. 快速找到字典中的公共键
 
    实际案例：西班牙足球甲级联赛，每轮球员进球统计
 
@@ -170,7 +170,7 @@ res1 = reduce(lambda a, b: a & b, res1)
 print res1
 ```
 
-7. 如何让字典保持有序
+### 7. 如何让字典保持有序
 
    实际案例：某编程竞赛系统，对参赛选手编程解题进行及时，选手完成题目后，把该选手解题用时记录到字典中，一百年赛后按照选手名称查询成绩（答题用时越短，成绩越优秀）
 
@@ -223,7 +223,7 @@ for k in d:
     print k, d[k]
 ```
 
-8. 如何实现用户的历史记录的功能(最多n条)？
+### 8. 如何实现用户的历史记录的功能(最多n条)？
 
    实际案例：很多程序都有浏览用户的历史记录的功能
 
@@ -270,4 +270,3 @@ while True:
     elif line == 'history' or line == 'h?':
         print list(history)
 ```
-
