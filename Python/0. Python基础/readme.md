@@ -270,3 +270,73 @@ while True:
     elif line == 'history' or line == 'h?':
         print list(history)
 ```
+### 9. 如何实现可迭代对象和迭代器对象
+
+   实践案例：某软件要求，从网络抓去各个城市气温信息，并依次显示：
+
+   北京：15~20
+
+   天津：17~22
+
+   长春：12~18
+
+   ......
+
+   如果一次抓去所有城市天气再显示，显示第一个城市气温的时候有很高的延时，并且浪费存储空间，我们期望以“用时访问”的策略，并且能把所有城市气温封装到一个对象里面，可用for语句进行迭代，如何解决？
+
+   解决方案：
+
+   step1:实现一个迭代器对象WeatherIterator，next方法每次返回一个城市气温
+
+   step2:实现一个可迭代对象WeatherIterable，\__iter__方法返回一个迭代器对象
+
+```python
+# coding:utf-8
+from collections import Iterable, Iterator
+import requests
+
+
+class WeatherIterator(Iterator):
+    def __init__(self, cities):
+        self.cities = cities
+        self.index = 0
+
+    def getWeather(self, city):
+        r = requests.get(u'http://wthrcdn.etouch.cn/weather_mini?city=' + city)
+        data = r.json()['data']['forecast'][0]
+        return '%s: %s, %s' % (city, data['low'], data['high'])
+
+    def next(self):
+        if self.index == len(self.cities):
+            raise StopIteration
+        city = self.cities[self.index]
+        self.index += 1
+        return self.getWeather(city)
+
+
+class WeatherIterable(Iterable):
+    def __init__(self, cities):
+        self.cities = cities
+
+    def __iter__(self):
+        return WeatherIterator(self.cities)
+
+
+if __name__=='__main__':
+    for x in WeatherIterable([u'北京', u'上海']):
+        print x
+```
+
+### 10. 如何使用生成器函数实现可迭代对象
+
+​	实际案例：实现一个可迭代对象的类，它能迭代处给定范围内所有的素数：
+
+​	pn = PrimeNumbers(1,30)
+
+​	for k in pn:
+
+​		print k
+
+​	输出结果：2 3 5 7 11 13 17 19 23 29
+
+​	解决方案：将该类的\__iter__方法实现生成器函数，每次yeild返回一个素数

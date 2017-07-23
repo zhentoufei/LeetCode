@@ -1,29 +1,24 @@
 # coding:utf-8
 
-from random import randint
-from collections import deque
+class PrimeNumbers:
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
 
-N = randint(0, 100)
-history = deque([], 5)
+    def isPrimeNum(self, k):
+        if k < 2:
+            return False
 
-
-def guess(k):
-    if k == N:
-        print 'right'
+        for i in xrange(2, k):
+            if k % i == 0:
+                return False
         return True
-    if k < N:
-        print '%s is less than N' % k
-    else:
-        print '%s is greater than N' % k
-    return False
+
+    def __iter__(self):
+        for k in xrange(self.start, self.end + 1):
+            if self.isPrimeNum(k):
+                yield k
 
 
-while True:
-    line = raw_input('pls input a number: ')
-    if line.isdigit():
-        k = int(line)
-        history.append(k)
-        if guess(k):
-            break
-    elif line == 'history' or line == 'h?':
-        print list(history)
+for x in PrimeNumbers(1, 100):
+    print x
