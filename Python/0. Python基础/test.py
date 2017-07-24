@@ -1,24 +1,19 @@
 # coding:utf-8
-
-class PrimeNumbers:
-    def __init__(self, start, end):
-        self.start = start
-        self.end = end
-
-    def isPrimeNum(self, k):
-        if k < 2:
-            return False
-
-        for i in xrange(2, k):
-            if k % i == 0:
-                return False
-        return True
-
-    def __iter__(self):
-        for k in xrange(self.start, self.end + 1):
-            if self.isPrimeNum(k):
-                yield k
-
-
-for x in PrimeNumbers(1, 100):
+from itertools import chain
+from random import randint
+# 例子1
+for x in chain([1, 2, 3, 4], ['a', 'b', 'c']):
     print x
+    # 输出1 2 3 4 a b c
+
+
+e1 = [randint(60, 100) for _ in xrange(40)]
+e2 = [randint(60, 100) for _ in xrange(22)]
+e3 = [randint(60, 100) for _ in xrange(33)]
+e4 = [randint(60, 100) for _ in xrange(55)]
+count = 0
+for s in chain(e1, e2, e3, e4):
+    if s > 90
+        count += 1
+
+print count

@@ -340,3 +340,231 @@ if __name__=='__main__':
 ​	输出结果：2 3 5 7 11 13 17 19 23 29
 
 ​	解决方案：将该类的\__iter__方法实现生成器函数，每次yeild返回一个素数
+
+```python
+def f():
+    print 'in f(), 1'
+    yield 1
+
+    print 'in f(), 2'
+    yield 2
+
+    print 'in f(), 3'
+    yield 3
+
+
+g = f()
+# 下面的语句运行完毕，虽然通过yield输出了一个值，但是还保留了程序的运行状态，
+# 那么在下次运行的时候会从2的地方输出
+print g.next()
+
+print g.next()
+```
+
+```python
+class PrimeNumbers:
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+
+    def isPrimeNum(self, k):
+        if k < 2:
+            return False
+
+        for i in xrange(2, k):
+            if k % i == 0:
+                return False
+        return True
+
+    def __iter__(self):
+        for k in xrange(self.start, self.end + 1):
+            if self.isPrimeNum(k):
+                yield k
+
+
+for x in PrimeNumbers(1, 100):
+    print x
+```
+
+###11. 如何进行反向迭代以及如何实现反向迭代
+
+​	如何实现一个连续浮点数发生器FloatRange(和xrange类似)，根据给定范围(start，end)和步进值(step)产生一些连续的浮点数，如迭代FloatRange(3.0,4.0,0.2)可产生序列：
+
+
+
+正向：3.0 3.2 3.4 3.6 3.8 4.0
+
+反向：4.0 3.8 3.6 3.4 3.2 3.0
+
+```python
+# coding:utf-8
+
+
+###############################################################
+l = [1, 2, 3, 4, 5]
+l.reverse()  # 这种方法改变了原来的列表
+l[::-1]  # 这种方法得到了一个与原来列表等大的方向列表
+
+# 那么我们的解决方案是如下
+reversed(l)  # 得到列表的反向迭代器，实际上调用了l.__reversed__()
+iter(l)  # 得到列表的正向迭代器，实际上调用了l.__iter__()
+
+for x in reversed(l):  # 实现了反向迭代
+    print x
+
+
+###############################################################
+
+
+# 下面show出我的解决方案哦
+class FloatRange:
+    def __init__(self, start, end, step=0.1):
+        self.start = start
+        self.end = end
+        self.step = step
+
+    def __iter__(self):
+        t = self.start
+        while t <= self.end:
+            yield t
+            t += self.step
+
+    def __reversed__(self):
+        t = self.end
+        while t >= self.start:
+            yield t
+            t -= self.step
+
+
+# 正向迭代
+for x in FloatRange(1.0, 4.0, 0.5):
+    print x
+
+# 反向迭代
+for x in reversed(FloatRange(1.0, 4.0, 0.5)):
+    print x
+```
+
+###11. 如何进行反向迭代以及如何实现反向迭代
+实际案例：有某个文件，我们想读取其中某范围的内容，如100~300行之间的内容，python中文本文件是刻碟带对象，我们是否可以使用类似列表切片操作的方式得到一个100~300行文件内容的生成器？
+
+也就是说，使用下面的代码可以吗？
+f=open('file')
+f[100:300]
+
+```python
+# coding:utf-8
+
+from itertools import islice
+
+f = open('your_file.txt')
+
+# 读取文件的所有的内容
+lines = f.readlines()
+print lines
+
+for line in f:
+    # 此时不会输出，因为在上面已经使用了print lines的操作，那么这个时候指针已经只向了最后的位置
+    # 如果希望输出信息，那么我们就需要作如下的操作f.seek(0)
+    print line
+
+# 使用迭代器的方法迭代文件：
+for line in islice(f, 100, 300):
+    print line
+
+for line in islice(f, 300):  # 读取到500行
+    print line
+
+for line in islice(f, 100, None):  # 从100，读取到最后
+    print line
+
+for line in islice(f, 100, -100):  
+    # error,不能使用反向索引，
+    # 因为这是一个迭代的过程，在此过程中明文件没有完全读取完毕，这时候不知道一共有多少行
+    print line
+```
+
+```python
+# coding:utf-8
+from itertools import islice
+
+# 注意点，初始化一个list
+l = []
+for i in xrange(15):
+    l.append(i)
+print l
+# 此时的输出是0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+
+t = iter(l)
+for x in islice(t, 5, 10):
+    print x,
+# 此时的输出是5 6 7 8 9
+
+for x in t:
+    print x
+    # 此时的输出是10 11 12 13 14
+
+
+# 所以在每次使用islice的时候都要重新申请一个对象，否则，在重新使用之前的iter处理过的对象的时候，会消耗之前的对象
+```
+
+###如何在一个for语句中迭代多个可迭代对象的？
+实际案例
+1. 某班同学期末考试成绩，语文，数学，英语，分别存储在3个列表中，同时迭代三个列表，计算每个学生的总分（并行）
+2. 某年级有四个班级，某次考试每个班级的英语成绩分别是存储在4个列表中，依次迭代每个列表，统计全学年成绩高于90分人数（串行）
+  **解决方案**：
+  *并行*：使用内置函数zip，他能将多个刻碟带对象合并，每次迭代返回一个元组
+  *串行*：使用标准库中的itertools.chain，他能将多个可迭代对象连接
+```python
+# coding:utf-8
+# 针对问题1
+from random import randint
+
+chinese = [randint(60, 100) for _ in xrange(40)]
+math = [randint(60, 100) for _ in xrange(40)]
+english = [randint(60, 100) for _ in xrange(40)]
+
+total = []
+for i in xrange(len(math)):
+    # 这么做的缺点是并不是所有的可迭代对象都支持引索操作，比如一个生成器
+    total.append(chinese[i] + math[i] + english[i])
+
+# 那么下面我们先看一些列子
+# 例子1
+print zip([1, 2, 3], ('a', 'b', 'c'))
+# 输出：[(1,'a'), (2, 'b'), (3, 'c')]
+
+# 例子2
+print zip([1, 2, 3], ('a', 'b', 'c'), [5, 6, 7])
+# 输出：[(1,'a'， 5), (2, 'b'， 6), (3, 'c'， 7)]
+
+# 例子3
+print zip([1, 2, 3], ('a', 'b'))
+# 输出：[(1,'a'), (2, 'b')]
+
+# 问题1的解决方案
+for c, m, e in zip(chinese, math, english):
+    total.append(c + m + e)
+```
+```python
+# coding:utf-8
+# 针对问题2
+from itertools import chain
+from random import randint
+# 例子1
+for x in chain([1, 2, 3, 4], ['a', 'b', 'c']):
+    print x
+    # 输出1 2 3 4 a b c
+
+
+e1 = [randint(60, 100) for _ in xrange(40)]
+e2 = [randint(60, 100) for _ in xrange(22)]
+e3 = [randint(60, 100) for _ in xrange(33)]
+e4 = [randint(60, 100) for _ in xrange(55)]
+count = 0
+for s in chain(e1, e2, e3, e4):
+    if s > 90
+        count += 1
+
+print count
+```
