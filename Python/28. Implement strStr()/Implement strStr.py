@@ -86,7 +86,7 @@ class Solution3(object):
                 print 'needle'
                 return -1
             if haystack[i_h] == needle[i_n]:
-                if i_h == len(needle) - 1:
+                if i_n == len(needle) - 1:
                     return i_h - i_n
                 i_h += 1
                 i_n += 1
@@ -95,25 +95,26 @@ class Solution3(object):
                 i_n = 0
         return -1
 
-def strStr(haystack, needle):
-    i_h = 0
-    i_n = 0
-    while i_h < len(haystack) and i_n < len(needle):
-        if not haystack:
-            print 'haystack'
-            return -1
-        if not needle:
-            print 'needle'
-            return -1
-        if haystack[i_h] == needle[i_n]:
-            if i_n == len(needle) - 1:
-                return i_h - i_n
-            i_h += 1
-            i_n += 1
-        else:
-            i_h = i_h - i_n + 1
-            i_n = 0
-    return -1
+
+class Solution4(object):
+    def strStr(self, haystack, needle):
+        """
+        :type haystack: str
+        :type needle: str
+        :rtype: int
+        """
+        nn = len(haystack)
+        mm = len(needle)
+        if haystack == needle:
+            return 0
+        for ii in range(nn):
+            if ii + mm > nn:
+                break
+            if haystack[ii:ii + mm] == needle:
+                return ii
+        return -1
+
+
 if __name__ == "__main__":
     # print Solution3().strStr("a", "")
     print Solution().strStr("abababcdab", "aaaabaa")
