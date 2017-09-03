@@ -23,15 +23,6 @@ public class MaxLen {
 		return len;
 	}
 
-	public static int[] generateArray(int size) {
-		int[] result = new int[size];
-		for (int i = 0; i != size; i++) {
-			result[i] = (int) (Math.random() * 11) - 5;
-		}
-		return result;
-	}
-
-
 	public static void main(String[] args) {
 //		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
 //		map.put(1, 2);

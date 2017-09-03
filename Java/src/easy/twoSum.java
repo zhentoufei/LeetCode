@@ -27,7 +27,7 @@ public class twoSum {
 		char[] digitNumberArray = numberString.toCharArray();
 		int[] digitArry = new int[numberString.toCharArray().length];
 		for (int i = 0; i < digitNumberArray.length; i++) {
-		    digitArry[i] = Integer.parseInt(digitNumberArray[i]);
+//		    digitArry[i] = Integer.parseInt(digitNumberArray[i]);
 		}
 		return digitArry;
 	}
