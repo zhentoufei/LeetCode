@@ -7,6 +7,7 @@ import java.util.List;
 
 public class permutation {
 
+	//有一个注意点：如果使用List<List<Intenger>>的话，在每次pop出去的时候，result_list里面的对应的元素也会pop出去
 	private static List<String> result_list = new ArrayList<String>();
 	private static Boolean[] used;
 
