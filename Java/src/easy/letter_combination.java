@@ -33,6 +33,8 @@ public class letter_combination {
 	public static List<String> letter_combinations(String digits) {
 		
 		results_list.clear();
+		if(digits == "")
+			return results_list;
 		find_combinations(digits, 0, "");
 		
 		return results_list;
