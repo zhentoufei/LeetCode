@@ -17,7 +17,7 @@ public class Knapsack01 {
 		// 第二种，当前背包+之前index-1的最小值
 
 		int res = find_bset_values(weitghts, values, index - 1, c);
-		if (c > weitghts[index])
+		if (c >= weitghts[index])
 			res = Math.max(res, values[index] + find_bset_values(weitghts, values, index - 1, c - weitghts[index]));
 		memo[index][c] = res;
 		return res;
@@ -25,9 +25,9 @@ public class Knapsack01 {
 
 	public static int knapsack01(int[] weights, int[] values, int C) {
 		int len_weights = weights.length;
-		memo = new int[len_weights][C];
+		memo = new int[len_weights][C + 1];
 		for (int i = 0; i < len_weights; i++) {
-			for (int j = 0; j < C; j++) {
+			for (int j = 0; j <= C; j++) {
 				memo[i][j] = -1;
 			}
 		}
@@ -35,8 +35,12 @@ public class Knapsack01 {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
+		// TODO Auto-generated method stub
+		int[] weights = { 1, 2, 3 };
+		int[] value = { 6, 10, 12 };
+		int C = 5;
+		System.out.println(knapsack01(weights, value, C));
 	}
 
 }
