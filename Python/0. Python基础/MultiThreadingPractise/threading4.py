@@ -22,12 +22,17 @@ import time
 # Thread 3 -------------|--------------|-->>>>run>>>>--|---------------------
 #                       |              |               |
 #         (GIL)release->|<-acquire(GIL)  (GIL)release->|<-acquire(GIL)
-# 从上图可以看出，在python中由于全局解释器锁的存在，程序在每个时刻只有一个线程在进行中
+# 从上图可以看出，在python中由于全局解释器锁的存在，程序在每个时刻只有一个线程在进行一步计算操作
 
 def job(l, q):
+
+
     res = sum(l)
     q.put(res)
-
+    if threading.current_thread().getName() == 'T0':
+        time.sleep(1)
+        print 'I am sleeping'
+    print 'thread', threading.current_thread().getName()
 
 def multithreading(l):
     q = Queue.Queue()
