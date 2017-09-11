@@ -5,7 +5,7 @@ public class Knapsack01 {
 	private static int[][] memo;
 
 	private static int find_bset_values(int[] weitghts, int[] values, int index, int c) {
-		if (index <= 0 || c <= 0) {
+		if (index < 0 || c <= 0) {
 			return 0;
 		}
 
