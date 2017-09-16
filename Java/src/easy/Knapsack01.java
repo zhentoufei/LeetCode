@@ -15,7 +15,7 @@ public class Knapsack01 {
 		// 两种方式，得到最好的东西
 		// 第一种，当前的值作为最好的，不需要取当前的物品，放进背包
 		// 第二种，当前背包+之前index-1的最小值
-
+		// 
 		int res = find_bset_values(weitghts, values, index - 1, c);
 		if (c >= weitghts[index])
 			res = Math.max(res, values[index] + find_bset_values(weitghts, values, index - 1, c - weitghts[index]));
