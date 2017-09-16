@@ -20,7 +20,7 @@ public class Heap<Item extends Comparable> {
 			data[i + 1] = arr[i];
 		count = n;
 
-		for (int i = count / 2; i >= 1; i++)
+		for (int i = count / 2; i >= 1; i--)
 			shiftDown(i);
 	}
 
@@ -43,9 +43,11 @@ public class Heap<Item extends Comparable> {
 	public Item extraMax() {
 		assert count > 0;
 		Item res = data[1];
+
 		swap(1, count);
-		shiftDown(1);
 		count--;
+		shiftDown(1);
+
 		return res;
 	}
 
@@ -105,15 +107,28 @@ public class Heap<Item extends Comparable> {
 	}
 
 	public static void main(String[] args) {
-		Heap<Integer> max_heap = new Heap<>(100);
-		int N = 100;
-		int M = 100;
-		for (int i = 0; i < N; i++)
-			max_heap.insert(new Integer((int) (Math.random() * M)));
-		Integer[] arr = new Integer[N];
-		for (int i = 0; i < N; i++) {
-			arr[i] = max_heap.getMax();
-		}
+		// Heap<Integer> max_heap = new Heap<>(100);
+		// int N = 100;
+		// int M = 100;
+		// for (int i = 0; i < N; i++)
+		// max_heap.insert(new Integer((int) (Math.random() * M)));
+		// Integer[] arr = new Integer[N];
+		//
+		// Integer[] arr = { 1, 2, 3, 8, 7, 6, 5, 4 };
+		// Heap<Integer> max_heap = new Heap<>(arr);
+		// for (int i = 0; i < 8; i++) {
+		// arr[i] = max_heap.extraMax();
+		// System.out.println(arr[i]);
+		// }
+		String str1 = "abc";
+		String str2 = "abc";
+		System.out.println(str1 == str2); //true
+		System.out.println(str1.equals(str2)); //true
+		String str3 = new String("abc");
+		System.out.println(str1 == str3);
+		System.out.println(str1.equals(str3));
+
+		
 	}
 
 }
