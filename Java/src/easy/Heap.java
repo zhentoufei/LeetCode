@@ -12,7 +12,7 @@ public class Heap<Item extends Comparable> {
 		this.capacity = capacity;
 	}
 
-	public Heap(Item arr[]) {
+	public Heap(Item[] arr) {
 		int n = arr.length;
 		data = (Item[]) new Comparable[n + 1];
 		capacity = n;
@@ -120,14 +120,10 @@ public class Heap<Item extends Comparable> {
 		// arr[i] = max_heap.extraMax();
 		// System.out.println(arr[i]);
 		// }
-		String str1 = "abc";
-		String str2 = "abc";
-		System.out.println(str1 == str2); //true
-		System.out.println(str1.equals(str2)); //true
-		String str3 = new String("abc");
-		System.out.println(str1 == str3);
-		System.out.println(str1.equals(str3));
-
+		Comparable[] arr = {'1','2','3','2','2'};
+		int[] int_arr = (int[])arr;
+		System.out.println();
+		
 		
 	}
 

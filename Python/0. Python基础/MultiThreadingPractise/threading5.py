@@ -5,7 +5,6 @@ __site__ = ''
 __software__ = 'PyCharm'
 __file__ = 'threading5.py'
 
-
 import threading
 
 def job_1():

@@ -23,6 +23,21 @@ def b_search(l, value):
             return mid
     return -1
 
+def bs(arr, val):
+    lo = 0
+    hi = len(arr)-1
+    # [lo,..., hi]
+    while lo<=hi:
+        mid = (lo+hi)/2
+
+        if arr[mid]>val:
+            hi = mid-1
+        elif arr[mid]<val:
+            lo = mid+1
+        else:
+            return
+
+
 
 if __name__ == '__main__':
     l = range(50)
