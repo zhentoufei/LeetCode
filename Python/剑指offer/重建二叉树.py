@@ -44,7 +44,7 @@ class Solution:
         root.left = self.reConstructBTWithTinLat(tin[:i], lat[:i])
         root.right = self.reConstructBTWithTinLat(tin[i + 1:], lat[i:-1])
         return root
-
+    #===========================递归方法实现的各种遍历=============================
     def front(self, root):
         if root == None:
             return
@@ -67,6 +67,25 @@ class Solution:
         self.later(root.left)
         self.later(root.right)
         print root.val
+    #===============================================================
+
+
+    #=========================广度优先遍历====================================
+    def level(self, root):
+        if root == None:
+            return
+        myQueue = []
+        node = root
+        myQueue.append(node)
+        while myQueue:
+            node = myQueue.pop(0)
+            print node.val
+            if node.left != None:
+                myQueue.append(node.left)
+            if node.right != None:
+                myQueue.append(node.right)
+
+
 
 
 if __name__ == '__main__':
