@@ -5,7 +5,11 @@ __site__ = ''
 __software__ = 'PyCharm'
 __file__ = '反向打印链表.py'
 
-
+'''
+面试题5：从头到尾打印链表：
+从头到尾遍历链表，并用一个栈存储每个结点的值，
+之后出栈输出值即可。
+'''
 class ListNode:
     def __init__(self, x = None):
         self.val = x
