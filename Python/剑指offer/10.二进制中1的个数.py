@@ -38,6 +38,7 @@ def isPowerOfTwo(n):
         return False
 
 
+
 # 判断两个数的二进制表示有多少位不一样, 直接比较两个数的二进制异或就可以
 def andOr(m, n):
     diff = m ^ n
