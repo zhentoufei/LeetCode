@@ -69,6 +69,53 @@ class Solution:
         print root.val
     #===============================================================
 
+    #=========================基于堆栈实现前序中序后续遍历==================================
+
+    def frontStack(self, root):
+        if root == None:
+            return
+        my_stack = []
+        node = root
+        while node or my_stack:
+            while node:
+                print node.val
+                my_stack.append(node)
+                node = node.left
+            node = my_stack.pop()
+            node = node.right
+
+    def middleStack(self, root):
+        if root == None:
+            return
+        my_stack = []
+        node = root
+        while node or my_stack:
+            while node:
+                my_stack.append(node)
+                node = node.left
+            node = my_stack.pop()
+            print node.val
+            node = node.right
+
+    def laterStack(self, root):
+        if root == None:
+            return
+
+        my_stack_1 = []
+        my_stack_2 = []
+        node = root
+        my_stack_1.append(node)
+        while my_stack_1:
+            node = my_stack_1.pop()
+            if node.left:
+                my_stack_1.append(node.left)
+            if node.right:
+                my_stack_1.append(node.right)
+            my_stack_2.append(node)
+        while my_stack_2:
+            print my_stack_2.pop().val
+
+
 
     #=========================广度优先遍历====================================
     def level(self, root):
@@ -97,4 +144,4 @@ if __name__ == '__main__':
     test = Solution()
     newTree = test.reConstructBTWithPreTin(pre, tin)
     newTree1 = test.reConstructBTWithTinLat(tin, lat)
-    test.front(newTree1)
+    test.middleStack(newTree)
