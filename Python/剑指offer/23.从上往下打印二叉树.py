@@ -37,15 +37,6 @@ class Solution:
                 queue.append(cur_root.right)
         return res
 
-    def printFromBottomToTop(self, root):
-        queue
-
-
-
-
-
-
-
 
 
 
