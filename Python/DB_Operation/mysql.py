@@ -29,18 +29,55 @@ class MysqlSearch():
         except MySQLdb.Error as e:
             print 'Error: %s' % e
 
-
-
     def getOne(self):
         cursor = self.conn.cursor()
         sql = 'select * from courses_lesson where id = %s;'
         cursor.execute(sql, (6,))
 
         # rest = cursor.fetchall()
-        rest = dict(zip([k[0] for k in cursor.description], cursor.fetchone()))
+        rest = dict(zip([k[0] for k in cursor.description], cursor.fetchall()))
         print rest
         cursor.close()
         self.conn.close()
+
+    def getAll(self):
+        cursor = self.conn.cursor()
+        sql = 'select * from courses_lesson;'
+        cursor.execute(sql)
+        # rest = cursor.fetchall()
+        rest = [dict(zip([k[0] for k in cursor.description], row))
+                for row in cursor.fetchall()]
+        print rest
+        cursor.close()
+        self.conn.close()
+
+    def get_more(self, page, page_size):
+        offset = (page - 1) * page_size
+        cursor = self.conn.cursor()
+        sql = "select * from 'news' where 'type' = %s order by 'created_at' desc limit %s, %s;"
+        cursor.execute(sql, ('百家', offset, page_size))
+        rest = [dict(zip([k[0] for k in cursor.description], row))
+                for row in cursor.fetchall()]
+        print rest
+        cursor.close()
+        self.conn.close()
+
+    def add_one(self):
+        try:
+            sql = (
+                "insert into 'news' ('title', 'image', 'content', 'types', 'is_valid') value"
+                "('til', 'img', %s, 'neitong', 'leixing', 'tiujian');"
+            )
+            cursor = self.conn.cursor()
+            cursor.execute(sql, ('标题'))
+            self.conn.commit()
+            cursor.close()
+            self.closeConn()
+        except:
+            print 'error'
+            self.conn.rollback()
+
+
 
 
     def closeConn(self):
@@ -53,6 +90,7 @@ class MysqlSearch():
 
 def main():
     obj = MysqlSearch().getOne()
+
 
 if __name__ == '__main__':
     main()

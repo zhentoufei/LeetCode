@@ -43,9 +43,10 @@ def topoSort(v, e):
     return result
 
 
-
 if __name__ == '__main__':
-    v = ['a', 'b', 'c', 'd', 'e']
-    e = [('a', 'b'), ('a', 'd'), ('b', 'c'), ('d', 'c'), ('d', 'e'), ('e', 'c')]
+    v = ['a', 'b', 'c', 'd', 'e', 'f', 'o']
+    e = [('a', 'b'), ('a', 'c'),
+         ('b', 'd'), ('b', 'e'), ('c', 'e'), ('c', 'f'),
+         ('d', 'o'), ('e', 'o'), ('f', 'o')]
     res = topoSort(v, e)
     print(res)
