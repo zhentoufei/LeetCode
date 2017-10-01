@@ -21,14 +21,15 @@ def reOrderArr(arr):
 
     front = 0
     rear = len(arr) - 1
-    while front <= rear:
+    while front < rear: # 不可能出现front == rear的情况
         while arr[front] & 0x1 == 1:  # 奇数的时候
             front += 1
         while arr[rear] & 0x1 == 0:  # 偶数的时候
             rear -= 1
 
-        arr[front], arr[rear] = arr[rear], arr[front]
-    arr[front], arr[rear] = arr[rear], arr[front]  # [1, 2, 3, 4, 5, 6, 7],在这种情况下会有多换一次的状况，我们需要
+        if front < rear:
+            arr[front], arr[rear] = arr[rear], arr[front]
+    # arr[front], arr[rear] = arr[rear], arr[front]  # [1, 2, 3, 4, 5, 6, 7],在这种情况下会有多换一次的状况，我们需要
     return arr
 
 
@@ -108,3 +109,8 @@ if __name__ == '__main__':
     f = [1, 2, 3, 4, 5, 6, 7]
     print ReorderOddEven(c)
     print ReorderOddEven(d)
+
+    g = [1, 2, 3, 4, 5, 6]
+    h = [1, 2, 3, 4, 5, 6, 7]
+    print Reorder(g, len(g), isEven)
+    print Reorder(h, len(h), isEven)
