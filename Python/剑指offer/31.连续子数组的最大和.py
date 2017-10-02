@@ -5,6 +5,7 @@ __site__ = ''
 __software__ = 'PyCharm'
 __file__ = '30.连续子数组的最大和.py'
 
+
 class Solution:
     def FindGreatestSumOfSubArray(self, array):
         if array == None or len(array) <= 0:
@@ -22,18 +23,18 @@ class Solution:
                 nGreatestSum = nCurSum
 
         return nGreatestSum
+
     # 动态规划解决问题
     def FindGreatestSumOfSubArray2(self, array):
         if array == None or len(array) <= 0:
             return 0
-        aList = [0]*len(array)
+        aList = [0] * len(array)
         for i in range(len(array)):
-            if i == 0 or aList[i-1] <= 0:
+            if i == 0 or aList[i - 1] <= 0:
                 aList[i] = array[i]
             else:
-                aList[i] = aList[i-1] + array[i]
+                aList[i] = aList[i - 1] + array[i]
         return max(aList)
-
 
 
 if __name__ == '__main__':
