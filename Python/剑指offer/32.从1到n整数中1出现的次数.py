@@ -18,10 +18,8 @@ class Solution:
         ones, m = 0, 1
         while m <= n:
             if ((n // m) % 10) != 0 and ((n // m) % 10) != 1:
-                print 'a', ones
                 ones += (n // 10 // m + 1) * m
             elif ((n // m) % 10) == 1:
-                print 'b', ones
                 ones += (n // m // 10) * m + n % m + 1
             m *= 10
         return ones
@@ -29,5 +27,5 @@ class Solution:
 
 if __name__ == '__main__':
     s = Solution()
-    print(s.NumberOf1Between1AndN_Solution(13))
-    print(s.NumberOf1Between1AndN2(13))
+    print(s.NumberOf1Between1AndN_Solution(526))
+    print(s.NumberOf1Between1AndN2(526))
