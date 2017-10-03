@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class permutation {
 
-	//有一个注意点：如果使用List<List<Intenger>>的话，在每次pop出去的时候，result_list里面的对应的元素也会pop出去
+	// 有一个注意点：如果使用List<List<Intenger>>的话，在每次pop出去的时候，result_list里面的对应的元素也会pop出去
 	private static List<String> result_list = new ArrayList<String>();
 	private static Boolean[] used;
 
@@ -47,13 +46,13 @@ public class permutation {
 	}
 
 	public static void main(String[] args) {
-//		String string = "123";
-//		string = string.substring(0, 1);
-//		System.out.println(string);
+		// String string = "123";
+		// string = string.substring(0, 1);
+		// System.out.println(string);
 
-		 int[] arr = new int[] { 1, 2, 3 };
-		 List<String> rse = my_permutation(new int[] { 1, 2});
-		 System.out.println(rse);
+		int[] arr = new int[] { 1, 2, 3 };
+		List<String> rse = my_permutation(new int[] { 1, 2, 3, 4 });
+		System.out.println(rse);
 
 	}
 
