@@ -30,7 +30,7 @@ class Solution:
                 end += 1
                 res_tmp.append(' ')
             elif str_list[end] == ' ':
-                str_list.append(self.reverse(str_list[start:end]))
+                res_tmp.append(self.reverse(str_list[start:end]))
                 start = end
             else:
                 end += 1
