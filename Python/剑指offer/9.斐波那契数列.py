@@ -60,4 +60,4 @@ def junmpFloor(number):
 if __name__ == '__main__':
     print method_1()(4)
     print method_2(4)
-    print method_3(4)
+    print junmpFloor(2)
