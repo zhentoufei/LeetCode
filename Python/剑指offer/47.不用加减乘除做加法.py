@@ -31,8 +31,8 @@ a = a ^ b;
 class Solution:
     def Add(self, num1, num2):
         while num2:
-            sum = num1 ^ num2
-            carry = (num1 & num2) << 1
+            sum = num1 ^ num2 # 不考虑进位，每一位相加，相当于做异或操作
+            carry = (num1 & num2) << 1 # 第二步进位，相当于先进性与操作，然后左移一位
             num1 = sum
             num2 = carry
         return num1
