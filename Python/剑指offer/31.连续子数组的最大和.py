@@ -76,6 +76,7 @@ def FindGreatestAvgfSubArray(length, array, k):
             else:
                 nGreatestSum = nCurSum
 
+
     return nGreatestSum / float(k)
 
 
